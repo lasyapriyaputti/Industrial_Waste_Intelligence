@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { height: 100%; margin: 0; }
+body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; background: #f8fafb; }
+.leaflet-container { font-family: 'Inter', system-ui, sans-serif; background: #e8eef2; }
+.leaflet-container:focus { outline: none; }
+
+/* ---- Factory markers ---- */
+.iwi-m { background: transparent; border: none; }
+.iwi-f { width: 16px; height: 16px; border-radius: 50%; box-sizing: border-box; transition: transform .2s; cursor: pointer; }
+.iwi-f:hover { transform: scale(1.35); }
+.iwi-f--reported { background: #059669; border: 2px solid #fff; box-shadow: 0 0 0 2px #05966966, 0 0 10px #059669aa; }
+.iwi-f--estimated { background: #f59e0b33; border: 2px dashed #b45309; opacity: .85; }
+.iwi-f--urgent { background: #ef444433; border: 2px dashed #dc2626; animation: iwi-pulse 1.8s infinite; }
+.iwi-f--sel { transform: scale(1.6); outline: 3px solid #0f172a; outline-offset: 1px; }
+.iwi-f--flash { animation: iwi-flash 1.2s ease-out 4; }
+@keyframes iwi-pulse { 0% { box-shadow: 0 0 0 0 #dc262699; } 70% { box-shadow: 0 0 0 12px #dc262600; } 100% { box-shadow: 0 0 0 0 #dc262600; } }
+@keyframes iwi-flash { 0% { box-shadow: 0 0 0 0 #10b981; } 100% { box-shadow: 0 0 0 26px #10b98100; } }
+
+/* ---- Facility markers: badge with utilisation ring ---- */
+.iwi-w { width: 34px; height: 34px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  background: conic-gradient(var(--c) calc(var(--p) * 1%), #cbd5e1 0); box-shadow: 0 2px 8px rgba(0,0,0,.35); cursor: pointer; transition: transform .2s; }
+.iwi-w:hover { transform: scale(1.15); }
+.iwi-w-in { width: 26px; height: 26px; border-radius: 9px; background: #1e3a8a; display: flex; align-items: center; justify-content: center; color: #fff; }
+.iwi-w--warn .iwi-w-in { background: #991b1b; }
+.iwi-w--exp { outline: 3px solid #f59e0b; outline-offset: 1px; }
+.iwi-w--sel { transform: scale(1.3); outline: 3px solid #0f172a; }
+
+/* ---- Overlays ---- */
+.iwi-zone-red { animation: iwi-glow 2.4s ease-in-out infinite; }
+@keyframes iwi-glow { 0%,100% { fill-opacity: .16; } 50% { fill-opacity: .34; } }
+.iwi-dash { stroke-dasharray: 8 8; animation: iwi-march 1s linear infinite; }
+@keyframes iwi-march { to { stroke-dashoffset: -16; } }
+.leaflet-tooltip.iwi-tip { font-size: 11px; font-weight: 600; border-radius: 8px; padding: 4px 8px; }
+.glass { background: rgba(255,255,255,.92); backdrop-filter: blur(8px); }
+@keyframes iwi-slide { from { transform: translateX(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+.iwi-slide { animation: iwi-slide .25s ease-out; }
